@@ -614,7 +614,6 @@ void MainWindow::on_Next_Button_clicked()
     on_Button_Clicked();
     }else{
     int getCurrentButtonNum = buttons.indexOf(editcurrent);
-    qDebug() << getCurrentButtonNum;
     if(getCurrentButtonNum > 0)
     {
     QPushButton *button = buttons.at(getCurrentButtonNum);
@@ -644,7 +643,6 @@ void MainWindow::on_Previous_Button_clicked()
     on_Button_Clicked();
     }else{
         int getCurrentButtonNum = buttons.indexOf(editcurrent);
-        qDebug() << getCurrentButtonNum;
     if(getCurrentButtonNum < buttons.size() - 1)
     {
     QPushButton *button = buttons.at(getCurrentButtonNum);
