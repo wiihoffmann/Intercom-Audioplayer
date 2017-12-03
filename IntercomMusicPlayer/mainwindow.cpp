@@ -292,7 +292,7 @@ void MainWindow::setVolume(int value)
     }
 }
 
-void MainWindow::setStatus()
+void MainWindow::setStatus() //Bug: When telephone buttons are pressed, the fade out happens.
 {
     currentTime = QTime::currentTime().toString();
 
@@ -302,15 +302,21 @@ void MainWindow::setStatus()
         {
             if(currentTime == timePreset[buttons1.at(a)->toolTip()].at(1))
             {
-                temp = current_song_number;
-                current_song_number = -2; //Fix this, this is due to the for loop not breaking and making it -2
-                on_intercomAll_Button_clicked();
-                break;
+                if(!(ifOnce)) //Only allowing once
+                {
+                    ifOnce = true;
+                    currentTimePreset = timePreset[buttons1.at(a)->toolTip()].at(0);
+                    temp = current_song_number;
+                    current_song_number = -2; //Fix this, this is due to the for loop not breaking and making it -2
+                    on_intercomAll_Button_clicked();
+                    break;
+                }
             }
             if(currentTime == timePreset[buttons1.at(a)->toolTip()].at(2))
             {
                 fadeChange = -(fade);
                 isFade = true;
+                currentTimePreset = "NULL";
                 break;
             }
         }
@@ -323,6 +329,7 @@ void MainWindow::setStatus()
         if(volume >= presetVolume)
         {
             isFade = false;
+            ifOnce = false;
             return;
         }
         if(volume <= 0)
@@ -330,8 +337,8 @@ void MainWindow::setStatus()
             isFade = false;
             temp = current_song_number;
             on_Stop_Button_clicked();
+            current_song_number = -3;
             on_intercomCancel_Button_clicked();
-            current_song_number = temp;
             return;
         }
     }
@@ -376,11 +383,11 @@ void MainWindow::setStatus()
                 on_random_Button_clicked();
             }else{
                 current_song_number = temp;
-                qDebug() << current_song_number;
                 if(buttons.size() > 0)
                 playList();
             }
         }else if(current_song_number == -3){
+            return;
         }else if(ifplaylist == true && current_song_number < buttons.size() - 1)
         {
             if(ifRandom == true)
@@ -399,11 +406,14 @@ void MainWindow::setStatus()
         current_song_number = buttons.indexOf(current);
     }
 
-    ui->Status_Label->setText("Currently Playing [Title: " + title + " Artist: " + artist + " Time: " + QTime::fromMSecsSinceStartOfDay(time*1000).toString("mm:ss") + "/" + QTime::fromMSecsSinceStartOfDay(maxitime*1000).toString("mm:ss") + "]" + " Current Time: [" + currentTime + "]");
+    statusLabel = "Currently Playing [Title: " + title + " Artist: " + artist + " Time: " + QTime::fromMSecsSinceStartOfDay(time*1000).toString("mm:ss") + "/" + QTime::fromMSecsSinceStartOfDay(maxitime*1000).toString("mm:ss") + "]" + " Current Time: [" + currentTime
+            + "] Current Time Preset: [" + currentTimePreset + "]";
+
+    ui->Status_Label->setText(statusLabel);
 
     if(noblemove > 6)
     {
-        this->setWindowTitle("Currently Playing [Title: " + title + " Artist: " + artist + " Time: " + QTime::fromMSecsSinceStartOfDay(time*1000).toString("mm:ss") + "/" + QTime::fromMSecsSinceStartOfDay(maxitime*1000).toString("mm:ss") + "]" + " Current Time: [" + currentTime + "]");
+        this->setWindowTitle(statusLabel);
     }
 
     DWORD level, leftc, rightc;

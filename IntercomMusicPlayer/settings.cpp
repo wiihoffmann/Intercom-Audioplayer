@@ -151,3 +151,13 @@ int Settings::getFade()
     return ui->fade_Slider->value();
 }
 
+
+void Settings::on_fade_CheckBox_clicked(bool checked)
+{
+    if(checked == false)
+    {
+        ui->fade_Slider->setEnabled(false);
+    }else{
+        ui->fade_Slider->setEnabled(true);
+    }
+}

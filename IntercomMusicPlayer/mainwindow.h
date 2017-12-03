@@ -137,6 +137,8 @@ private:
     QString OutputDevice1;
     QString OutputDevice2;
     QString currentTime;
+    QString statusLabel;
+    QString currentTimePreset;
     HSTREAM stream;
     HSTREAM stream1;
     HSTREAM stream2;
@@ -163,6 +165,7 @@ private:
     bool ifedit = false;
     bool isFade = false;
     bool ifRandom = false;
+    bool ifOnce = false;
 
     QPushButton *current;
     QPushButton *editcurrent;

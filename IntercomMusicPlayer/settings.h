@@ -64,6 +64,8 @@ private slots:
 
     void on_buttonBox_rejected();
 
+    void on_fade_CheckBox_clicked(bool checked);
+
 private:
     Ui::Settings *ui;
     int device;

@@ -29,24 +29,25 @@ class Ui_Settings
 {
 public:
     QGridLayout *gridLayout;
-    QComboBox *OutputList3_ComboBox;
-    QLabel *Volume_Label;
-    QSpacerItem *verticalSpacer_4;
-    QSpacerItem *verticalSpacer_3;
-    QComboBox *OutputList_ComboBox;
-    QComboBox *OutputList2_ComboBox;
     QDialogButtonBox *buttonBox;
     QCheckBox *Button_Checkbox;
     QLabel *label_2;
-    QCheckBox *Random_Checkbox;
     QSlider *fade_Slider;
+    QCheckBox *Random_Checkbox;
     QComboBox *HZ_ComboBox;
-    QCheckBox *Playlist_Checkbox;
-    QLabel *label;
-    QLabel *fade_Label;
     QSlider *Volume_Slider;
     QSpacerItem *verticalSpacer_2;
+    QLabel *label;
+    QLabel *fade_Label;
+    QCheckBox *Playlist_Checkbox;
     QCheckBox *Repeat_Checkbox;
+    QLabel *Volume_Label;
+    QComboBox *OutputList2_ComboBox;
+    QComboBox *OutputList3_ComboBox;
+    QSpacerItem *verticalSpacer_3;
+    QComboBox *OutputList_ComboBox;
+    QSpacerItem *verticalSpacer_4;
+    QCheckBox *fade_CheckBox;
 
     void setupUi(QDialog *Settings)
     {
@@ -55,40 +56,12 @@ public:
         Settings->resize(400, 443);
         gridLayout = new QGridLayout(Settings);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        OutputList3_ComboBox = new QComboBox(Settings);
-        OutputList3_ComboBox->setObjectName(QStringLiteral("OutputList3_ComboBox"));
-
-        gridLayout->addWidget(OutputList3_ComboBox, 5, 0, 1, 1);
-
-        Volume_Label = new QLabel(Settings);
-        Volume_Label->setObjectName(QStringLiteral("Volume_Label"));
-
-        gridLayout->addWidget(Volume_Label, 12, 0, 1, 1);
-
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout->addItem(verticalSpacer_4, 17, 0, 1, 1);
-
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout->addItem(verticalSpacer_3, 16, 0, 1, 1);
-
-        OutputList_ComboBox = new QComboBox(Settings);
-        OutputList_ComboBox->setObjectName(QStringLiteral("OutputList_ComboBox"));
-
-        gridLayout->addWidget(OutputList_ComboBox, 3, 0, 1, 1);
-
-        OutputList2_ComboBox = new QComboBox(Settings);
-        OutputList2_ComboBox->setObjectName(QStringLiteral("OutputList2_ComboBox"));
-
-        gridLayout->addWidget(OutputList2_ComboBox, 4, 0, 1, 1);
-
         buttonBox = new QDialogButtonBox(Settings);
         buttonBox->setObjectName(QStringLiteral("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
-        gridLayout->addWidget(buttonBox, 18, 0, 1, 1);
+        gridLayout->addWidget(buttonBox, 20, 0, 1, 1);
 
         Button_Checkbox = new QCheckBox(Settings);
         Button_Checkbox->setObjectName(QStringLiteral("Button_Checkbox"));
@@ -100,42 +73,24 @@ public:
 
         gridLayout->addWidget(label_2, 2, 0, 1, 1);
 
+        fade_Slider = new QSlider(Settings);
+        fade_Slider->setObjectName(QStringLiteral("fade_Slider"));
+        fade_Slider->setEnabled(true);
+        fade_Slider->setMaximum(100);
+        fade_Slider->setOrientation(Qt::Horizontal);
+
+        gridLayout->addWidget(fade_Slider, 17, 0, 1, 1);
+
         Random_Checkbox = new QCheckBox(Settings);
         Random_Checkbox->setObjectName(QStringLiteral("Random_Checkbox"));
         Random_Checkbox->setEnabled(true);
 
         gridLayout->addWidget(Random_Checkbox, 10, 0, 1, 1);
 
-        fade_Slider = new QSlider(Settings);
-        fade_Slider->setObjectName(QStringLiteral("fade_Slider"));
-        fade_Slider->setMaximum(100);
-        fade_Slider->setOrientation(Qt::Horizontal);
-
-        gridLayout->addWidget(fade_Slider, 15, 0, 1, 1);
-
         HZ_ComboBox = new QComboBox(Settings);
         HZ_ComboBox->setObjectName(QStringLiteral("HZ_ComboBox"));
 
         gridLayout->addWidget(HZ_ComboBox, 6, 0, 1, 1);
-
-        Playlist_Checkbox = new QCheckBox(Settings);
-        Playlist_Checkbox->setObjectName(QStringLiteral("Playlist_Checkbox"));
-
-        gridLayout->addWidget(Playlist_Checkbox, 8, 0, 1, 1);
-
-        label = new QLabel(Settings);
-        label->setObjectName(QStringLiteral("label"));
-        QFont font;
-        font.setPointSize(26);
-        font.setUnderline(true);
-        label->setFont(font);
-
-        gridLayout->addWidget(label, 0, 0, 1, 1);
-
-        fade_Label = new QLabel(Settings);
-        fade_Label->setObjectName(QStringLiteral("fade_Label"));
-
-        gridLayout->addWidget(fade_Label, 14, 0, 1, 1);
 
         Volume_Slider = new QSlider(Settings);
         Volume_Slider->setObjectName(QStringLiteral("Volume_Slider"));
@@ -149,11 +104,64 @@ public:
 
         gridLayout->addItem(verticalSpacer_2, 1, 0, 1, 1);
 
+        label = new QLabel(Settings);
+        label->setObjectName(QStringLiteral("label"));
+        QFont font;
+        font.setPointSize(26);
+        font.setUnderline(true);
+        label->setFont(font);
+
+        gridLayout->addWidget(label, 0, 0, 1, 1);
+
+        fade_Label = new QLabel(Settings);
+        fade_Label->setObjectName(QStringLiteral("fade_Label"));
+
+        gridLayout->addWidget(fade_Label, 16, 0, 1, 1);
+
+        Playlist_Checkbox = new QCheckBox(Settings);
+        Playlist_Checkbox->setObjectName(QStringLiteral("Playlist_Checkbox"));
+
+        gridLayout->addWidget(Playlist_Checkbox, 8, 0, 1, 1);
+
         Repeat_Checkbox = new QCheckBox(Settings);
         Repeat_Checkbox->setObjectName(QStringLiteral("Repeat_Checkbox"));
         Repeat_Checkbox->setEnabled(false);
 
         gridLayout->addWidget(Repeat_Checkbox, 11, 0, 1, 1);
+
+        Volume_Label = new QLabel(Settings);
+        Volume_Label->setObjectName(QStringLiteral("Volume_Label"));
+
+        gridLayout->addWidget(Volume_Label, 12, 0, 1, 1);
+
+        OutputList2_ComboBox = new QComboBox(Settings);
+        OutputList2_ComboBox->setObjectName(QStringLiteral("OutputList2_ComboBox"));
+
+        gridLayout->addWidget(OutputList2_ComboBox, 4, 0, 1, 1);
+
+        OutputList3_ComboBox = new QComboBox(Settings);
+        OutputList3_ComboBox->setObjectName(QStringLiteral("OutputList3_ComboBox"));
+
+        gridLayout->addWidget(OutputList3_ComboBox, 5, 0, 1, 1);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer_3, 18, 0, 1, 1);
+
+        OutputList_ComboBox = new QComboBox(Settings);
+        OutputList_ComboBox->setObjectName(QStringLiteral("OutputList_ComboBox"));
+
+        gridLayout->addWidget(OutputList_ComboBox, 3, 0, 1, 1);
+
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout->addItem(verticalSpacer_4, 19, 0, 1, 1);
+
+        fade_CheckBox = new QCheckBox(Settings);
+        fade_CheckBox->setObjectName(QStringLiteral("fade_CheckBox"));
+        fade_CheckBox->setChecked(true);
+
+        gridLayout->addWidget(fade_CheckBox, 14, 0, 1, 1);
 
 
         retranslateUi(Settings);
@@ -166,14 +174,15 @@ public:
     void retranslateUi(QDialog *Settings)
     {
         Settings->setWindowTitle(QApplication::translate("Settings", "Dialog", Q_NULLPTR));
-        Volume_Label->setText(QApplication::translate("Settings", "Volume", Q_NULLPTR));
         Button_Checkbox->setText(QApplication::translate("Settings", "No Audio Stop", Q_NULLPTR));
         label_2->setText(QApplication::translate("Settings", "Output Device", Q_NULLPTR));
         Random_Checkbox->setText(QApplication::translate("Settings", "Random", Q_NULLPTR));
-        Playlist_Checkbox->setText(QApplication::translate("Settings", "Playlist Mode", Q_NULLPTR));
         label->setText(QApplication::translate("Settings", "Settings", Q_NULLPTR));
         fade_Label->setText(QApplication::translate("Settings", "Fade In and Out Duration", Q_NULLPTR));
+        Playlist_Checkbox->setText(QApplication::translate("Settings", "Playlist Mode", Q_NULLPTR));
         Repeat_Checkbox->setText(QApplication::translate("Settings", "Repeat", Q_NULLPTR));
+        Volume_Label->setText(QApplication::translate("Settings", "Volume", Q_NULLPTR));
+        fade_CheckBox->setText(QApplication::translate("Settings", "Fade In and Out", Q_NULLPTR));
     } // retranslateUi
 
 };

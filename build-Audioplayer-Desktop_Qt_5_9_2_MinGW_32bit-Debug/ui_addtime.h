@@ -87,11 +87,13 @@ public:
 
         volume_Label = new QLabel(addTime);
         volume_Label->setObjectName(QStringLiteral("volume_Label"));
+        volume_Label->setEnabled(false);
 
         gridLayout->addWidget(volume_Label, 6, 0, 1, 1);
 
         volume_Slider = new QSlider(addTime);
         volume_Slider->setObjectName(QStringLiteral("volume_Slider"));
+        volume_Slider->setEnabled(false);
         volume_Slider->setMaximum(100);
         volume_Slider->setValue(50);
         volume_Slider->setOrientation(Qt::Horizontal);
@@ -100,6 +102,7 @@ public:
 
         fade_checkBox = new QCheckBox(addTime);
         fade_checkBox->setObjectName(QStringLiteral("fade_checkBox"));
+        fade_checkBox->setEnabled(false);
 
         gridLayout->addWidget(fade_checkBox, 8, 0, 1, 1);
 
