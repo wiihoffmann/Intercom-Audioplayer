@@ -611,7 +611,7 @@ void MainWindow::on_actionOpen_Preset_triggered()
                 }
                 if(reader.name() == "Volume")
                 {
-                    volume = reader.readElementText().toInt();
+                    volume = reader.readElementText().toDouble();
                     BASS_SetDevice(device);
                     BASS_ChannelSetAttribute(stream, BASS_ATTRIB_VOL, volume);
                     //BASS_SetVolume(volume); //Setting volume

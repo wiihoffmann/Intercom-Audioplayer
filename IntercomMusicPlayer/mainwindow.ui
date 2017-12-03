@@ -140,7 +140,7 @@
     <item row="1" column="2">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="Audio_Tab">
        <attribute name="title">
@@ -248,6 +248,9 @@
         </item>
         <item row="2" column="0">
          <widget class="QPushButton" name="removeTime_Button">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Remove Time</string>
           </property>
@@ -397,6 +400,7 @@
     <addaction name="actionInsert_Sound"/>
     <addaction name="actionOpen_Preset"/>
     <addaction name="actionSave_Preset"/>
+    <addaction name="actionSetup_Dialup_Tone"/>
    </widget>
    <widget class="QMenu" name="menuMode">
     <property name="title">
@@ -431,6 +435,14 @@
   <action name="actionInsert_Sound">
    <property name="text">
     <string>Insert Music</string>
+   </property>
+  </action>
+  <action name="actionSetup_Dialup_Tone">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Setup Dial Tone</string>
    </property>
   </action>
  </widget>

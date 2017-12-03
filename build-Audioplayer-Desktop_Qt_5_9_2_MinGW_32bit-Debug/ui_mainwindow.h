@@ -37,6 +37,7 @@ public:
     QAction *actionSoundBoard_Mode;
     QAction *actionPlaylist_Mode;
     QAction *actionInsert_Sound;
+    QAction *actionSetup_Dialup_Tone;
     QWidget *centralWidget;
     QGridLayout *gridLayout_2;
     QFrame *frame;
@@ -103,6 +104,9 @@ public:
         actionPlaylist_Mode->setObjectName(QStringLiteral("actionPlaylist_Mode"));
         actionInsert_Sound = new QAction(MainWindow);
         actionInsert_Sound->setObjectName(QStringLiteral("actionInsert_Sound"));
+        actionSetup_Dialup_Tone = new QAction(MainWindow);
+        actionSetup_Dialup_Tone->setObjectName(QStringLiteral("actionSetup_Dialup_Tone"));
+        actionSetup_Dialup_Tone->setEnabled(false);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout_2 = new QGridLayout(centralWidget);
@@ -256,6 +260,7 @@ public:
 
         removeTime_Button = new QPushButton(TimePreset_Tab);
         removeTime_Button->setObjectName(QStringLiteral("removeTime_Button"));
+        removeTime_Button->setEnabled(false);
 
         gridLayout_5->addWidget(removeTime_Button, 2, 0, 1, 1);
 
@@ -365,12 +370,13 @@ public:
         menuFile->addAction(actionInsert_Sound);
         menuFile->addAction(actionOpen_Preset);
         menuFile->addAction(actionSave_Preset);
+        menuFile->addAction(actionSetup_Dialup_Tone);
         menuMode->addAction(actionPlaylist_Mode);
         menuMode->addAction(actionSoundBoard_Mode);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -384,6 +390,7 @@ public:
         actionSoundBoard_Mode->setText(QApplication::translate("MainWindow", "Soundboard Mode", Q_NULLPTR));
         actionPlaylist_Mode->setText(QApplication::translate("MainWindow", "Playlist Mode", Q_NULLPTR));
         actionInsert_Sound->setText(QApplication::translate("MainWindow", "Insert Music", Q_NULLPTR));
+        actionSetup_Dialup_Tone->setText(QApplication::translate("MainWindow", "Setup Dial Tone", Q_NULLPTR));
 #ifndef QT_NO_STATUSTIP
         frame->setStatusTip(QString());
 #endif // QT_NO_STATUSTIP
