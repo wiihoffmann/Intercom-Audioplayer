@@ -150,6 +150,7 @@ void MainWindow::playList()
     if(ifplaylist == true)
     {
         current_song_number++;
+        current = buttons.at(current_song_number);
         playSound(buttons.at(current_song_number)->toolTip());
     }
 }
@@ -183,7 +184,7 @@ void MainWindow::playSound(QString string)
 
     if(stream)
     {
-        player.setMedia(QUrl::fromLocalFile(string));
+        //player.setMedia(QUrl::fromLocalFile(string));
         BASS_ChannelSetSync(stream, BASS_SYNC_END, 0, &MainWindow::EndSyncProc, this); //Syncing
         BASS_ChannelPlay(stream, 0); //Playing the audio
         BASS_ChannelPlay(stream1, 0);
@@ -301,15 +302,9 @@ void MainWindow::setStatus()
         {
             if(currentTime == timePreset[buttons1.at(a)->toolTip()].at(1))
             {
-                isFade = true;
-                fadeChange = fade;
-                volume = 0;
-                if(ifRandom == true)
-                {
-                    on_random_Button_clicked();
-                }else{
-                    playList();
-                }
+                temp = current_song_number;
+                current_song_number = -2; //Fix this, this is due to the for loop not breaking and making it -2
+                on_intercomAll_Button_clicked();
                 break;
             }
             if(currentTime == timePreset[buttons1.at(a)->toolTip()].at(2))
@@ -333,7 +328,10 @@ void MainWindow::setStatus()
         if(volume <= 0)
         {
             isFade = false;
+            temp = current_song_number;
             on_Stop_Button_clicked();
+            on_intercomCancel_Button_clicked();
+            current_song_number = temp;
             return;
         }
     }
@@ -345,25 +343,12 @@ void MainWindow::setStatus()
     QString artist;
     QString title;
 
-    TagLib::FileRef f(current->toolTip().toStdString().c_str());
+    if(current_song_number > -1) //This crashes alot
+    {
+    TagLib::FileRef f(buttons.at(current_song_number)->toolTip().toStdString().c_str());
     title = QString::fromStdString(f.tag()->title().to8Bit());
     artist = QString::fromStdString(f.tag()->artist().to8Bit());
-    /*if(player.metaData(QMediaMetaData::AlbumArtist).toString() != "")
-    {
-        artist = player.metaData(QMediaMetaData::AlbumArtist).toString();
-    }else if(player.metaData(QMediaMetaData::ContributingArtist).toString() != "")
-    {
-        artist = player.metaData(QMediaMetaData::ContributingArtist).toString();
-    }else{
-        artist = "NULL";
     }
-
-    if(player.metaData(QMediaMetaData::Title).toString() != "")
-    {
-        title = player.metaData(QMediaMetaData::Title).toString();
-    }else{
-        title = "NULL";
-    }*/
 
     if(ifplaylist == true && current_song_number == 0)
     {
@@ -377,12 +362,33 @@ void MainWindow::setStatus()
     {
         ui->Next_Button->setDisabled(true);
         ui->Previous_Button->setDisabled(true);
-        if(ifplaylist == true && current_song_number < buttons.size() - 1)
+        if(current_song_number == -1)
+        {
+
+        }else if(current_song_number == -2)
+        {
+            isFade = true;
+            fadeChange = fade;
+            volume = 0;
+            if(ifRandom == true)
+            {
+                if(buttons.size() > 0)
+                on_random_Button_clicked();
+            }else{
+                current_song_number = temp;
+                qDebug() << current_song_number;
+                if(buttons.size() > 0)
+                playList();
+            }
+        }else if(current_song_number == -3){
+        }else if(ifplaylist == true && current_song_number < buttons.size() - 1)
         {
             if(ifRandom == true)
             {
+                if(buttons.size() > 0)
                 on_random_Button_clicked();
             }else{
+                if(buttons.size() > 0)
                 playList();
             }
         }
@@ -852,61 +858,73 @@ void MainWindow::on_actionInsert_Sound_triggered()
 
 void MainWindow::on_one_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/1.wav");
 }
 
 void MainWindow::on_two_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/2.wav");
 }
 
 void MainWindow::on_three_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/3.wav");
 }
 
 void MainWindow::on_four_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/4.wav");
 }
 
 void MainWindow::on_five_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/5.wav");
 }
 
 void MainWindow::on_six_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/6.wav");
 }
 
 void MainWindow::on_seven_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/7.wav");
 }
 
 void MainWindow::on_eight_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/8.wav");
 }
 
 void MainWindow::on_nine_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/9.wav");
 }
 
 void MainWindow::on_asterisk_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/s.wav");
 }
 
 void MainWindow::on_zero_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/0.wav");
 }
 
 void MainWindow::on_hash_Button_clicked()
 {
+    current_song_number = -1;
     playSound("./Generated Tones/p.wav");
 }
 

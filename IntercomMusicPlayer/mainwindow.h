@@ -4,11 +4,11 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QVBoxLayout>
-#include <QMediaPlayer>
+//#include <QMediaPlayer>
 #include <QDebug>
-#include <QMediaService>
-#include <QAudioOutputSelectorControl>
-#include <QMediaMetaData>
+//#include <QMediaService>
+//#include <QAudioOutputSelectorControl>
+//#include <QMediaMetaData>
 #include <QTime>
 #include <QTimer>
 #include <QMessageBox>
@@ -131,7 +131,7 @@ private:
     QWidget *widget1;
     QVBoxLayout *layout;
     QVBoxLayout *layout1;
-    QMediaPlayer player;
+    //QMediaPlayer player;
 
     QString OutputDevice;
     QString OutputDevice1;
@@ -149,6 +149,7 @@ private:
     int Samplerate = 44100;
     int current_song_number = -1;
     int Mode = 0; // 0 = Soundboard, 1 = Playlist
+    int temp = -1;
 
     double volume = 0.5;
     double presetVolume = 0.5;

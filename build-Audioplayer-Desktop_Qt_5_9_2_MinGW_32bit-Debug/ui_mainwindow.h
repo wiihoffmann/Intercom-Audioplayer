@@ -370,7 +370,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -404,6 +404,9 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(TimePreset_Tab), QApplication::translate("MainWindow", "Time Preset", Q_NULLPTR));
         six_Button->setText(QApplication::translate("MainWindow", "6", Q_NULLPTR));
         five_Button->setText(QApplication::translate("MainWindow", "5", Q_NULLPTR));
+#ifndef QT_NO_TOOLTIP
+        one_Button->setToolTip(QApplication::translate("MainWindow", "1", Q_NULLPTR));
+#endif // QT_NO_TOOLTIP
         one_Button->setText(QApplication::translate("MainWindow", "1", Q_NULLPTR));
         nine_Button->setText(QApplication::translate("MainWindow", "9", Q_NULLPTR));
         two_Button->setText(QApplication::translate("MainWindow", "2", Q_NULLPTR));

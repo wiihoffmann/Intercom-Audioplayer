@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QTimer>
-#include <QAudioDeviceInfo>
+//#include <QAudioDeviceInfo>
 #include <QDebug>
 #include "bass.h"
 
