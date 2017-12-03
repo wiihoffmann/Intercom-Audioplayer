@@ -221,16 +221,19 @@ public:
 
         Next_Button = new QPushButton(Audio_Tab);
         Next_Button->setObjectName(QStringLiteral("Next_Button"));
+        Next_Button->setEnabled(false);
 
         gridLayout_3->addWidget(Next_Button, 1, 1, 1, 1);
 
         Previous_Button = new QPushButton(Audio_Tab);
         Previous_Button->setObjectName(QStringLiteral("Previous_Button"));
+        Previous_Button->setEnabled(false);
 
         gridLayout_3->addWidget(Previous_Button, 2, 1, 1, 1);
 
         random_Button = new QPushButton(Audio_Tab);
         random_Button->setObjectName(QStringLiteral("random_Button"));
+        random_Button->setEnabled(false);
 
         gridLayout_3->addWidget(random_Button, 3, 1, 1, 1);
 
@@ -362,12 +365,12 @@ public:
         menuFile->addAction(actionInsert_Sound);
         menuFile->addAction(actionOpen_Preset);
         menuFile->addAction(actionSave_Preset);
-        menuMode->addAction(actionSoundBoard_Mode);
         menuMode->addAction(actionPlaylist_Mode);
+        menuMode->addAction(actionSoundBoard_Mode);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -380,7 +383,7 @@ public:
         actionSave_Preset->setText(QApplication::translate("MainWindow", "Save Preset", Q_NULLPTR));
         actionSoundBoard_Mode->setText(QApplication::translate("MainWindow", "Soundboard Mode", Q_NULLPTR));
         actionPlaylist_Mode->setText(QApplication::translate("MainWindow", "Playlist Mode", Q_NULLPTR));
-        actionInsert_Sound->setText(QApplication::translate("MainWindow", "Insert Sound", Q_NULLPTR));
+        actionInsert_Sound->setText(QApplication::translate("MainWindow", "Insert Music", Q_NULLPTR));
 #ifndef QT_NO_STATUSTIP
         frame->setStatusTip(QString());
 #endif // QT_NO_STATUSTIP
@@ -388,7 +391,7 @@ public:
         Secret_Button->setText(QApplication::translate("MainWindow", "#Noblemove", Q_NULLPTR));
         Status_Label->setText(QApplication::translate("MainWindow", "Currently Playing: [NULL] Current Time: [NULL]", Q_NULLPTR));
         Pause_Button->setText(QApplication::translate("MainWindow", "Pause", Q_NULLPTR));
-        ISound_Button->setText(QApplication::translate("MainWindow", "Insert Sound", Q_NULLPTR));
+        ISound_Button->setText(QApplication::translate("MainWindow", "Insert Music", Q_NULLPTR));
         Stop_Button->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
         Setting_Button->setText(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
         EPlaylist_Button->setText(QApplication::translate("MainWindow", "Edit Playlist", Q_NULLPTR));

@@ -70,6 +70,7 @@ public:
         start_timeEdit->setObjectName(QStringLiteral("start_timeEdit"));
         start_timeEdit->setCalendarPopup(false);
         start_timeEdit->setTimeSpec(Qt::LocalTime);
+        start_timeEdit->setTime(QTime(12, 0, 0));
 
         gridLayout->addWidget(start_timeEdit, 3, 0, 1, 1);
 
@@ -80,6 +81,7 @@ public:
 
         end_timeEdit = new QTimeEdit(addTime);
         end_timeEdit->setObjectName(QStringLiteral("end_timeEdit"));
+        end_timeEdit->setTime(QTime(12, 0, 0));
 
         gridLayout->addWidget(end_timeEdit, 5, 0, 1, 1);
 
