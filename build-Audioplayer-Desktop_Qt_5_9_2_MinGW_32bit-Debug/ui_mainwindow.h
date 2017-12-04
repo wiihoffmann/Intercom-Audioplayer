@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
@@ -25,6 +26,7 @@
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -42,15 +44,17 @@ public:
     QGridLayout *gridLayout_2;
     QFrame *frame;
     QGridLayout *gridLayout;
-    QPushButton *Remove_Button;
+    QSlider *Speed_Slider;
+    QPushButton *Setting_Button;
     QPushButton *Secret_Button;
+    QPushButton *Remove_Button;
     QSlider *Time_Slider;
     QLabel *Status_Label;
     QPushButton *Pause_Button;
-    QPushButton *ISound_Button;
     QPushButton *Stop_Button;
-    QPushButton *Setting_Button;
-    QSlider *Speed_Slider;
+    QPushButton *ISound_Button;
+    QTimeEdit *debug_timeEdit;
+    QCheckBox *debugEnable_checkBox;
     QProgressBar *VU_Meter;
     QProgressBar *VU_Meter_2;
     QTabWidget *tabWidget;
@@ -93,7 +97,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(524, 353);
+        MainWindow->resize(524, 396);
         actionOpen_Preset = new QAction(MainWindow);
         actionOpen_Preset->setObjectName(QStringLiteral("actionOpen_Preset"));
         actionSave_Preset = new QAction(MainWindow);
@@ -121,55 +125,67 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        Remove_Button = new QPushButton(frame);
-        Remove_Button->setObjectName(QStringLiteral("Remove_Button"));
-
-        gridLayout->addWidget(Remove_Button, 4, 5, 1, 1);
-
-        Secret_Button = new QPushButton(frame);
-        Secret_Button->setObjectName(QStringLiteral("Secret_Button"));
-
-        gridLayout->addWidget(Secret_Button, 4, 2, 1, 1);
-
-        Time_Slider = new QSlider(frame);
-        Time_Slider->setObjectName(QStringLiteral("Time_Slider"));
-        Time_Slider->setOrientation(Qt::Horizontal);
-
-        gridLayout->addWidget(Time_Slider, 1, 0, 1, 6);
-
-        Status_Label = new QLabel(frame);
-        Status_Label->setObjectName(QStringLiteral("Status_Label"));
-
-        gridLayout->addWidget(Status_Label, 3, 0, 1, 6);
-
-        Pause_Button = new QPushButton(frame);
-        Pause_Button->setObjectName(QStringLiteral("Pause_Button"));
-
-        gridLayout->addWidget(Pause_Button, 4, 3, 1, 1);
-
-        ISound_Button = new QPushButton(frame);
-        ISound_Button->setObjectName(QStringLiteral("ISound_Button"));
-
-        gridLayout->addWidget(ISound_Button, 4, 0, 1, 1);
-
-        Stop_Button = new QPushButton(frame);
-        Stop_Button->setObjectName(QStringLiteral("Stop_Button"));
-
-        gridLayout->addWidget(Stop_Button, 4, 4, 1, 1);
-
-        Setting_Button = new QPushButton(frame);
-        Setting_Button->setObjectName(QStringLiteral("Setting_Button"));
-
-        gridLayout->addWidget(Setting_Button, 4, 1, 1, 1);
-
         Speed_Slider = new QSlider(frame);
         Speed_Slider->setObjectName(QStringLiteral("Speed_Slider"));
-        Speed_Slider->setEnabled(true);
+        Speed_Slider->setEnabled(false);
         Speed_Slider->setMinimum(1);
         Speed_Slider->setMaximum(255);
         Speed_Slider->setOrientation(Qt::Horizontal);
 
         gridLayout->addWidget(Speed_Slider, 0, 0, 1, 6);
+
+        Setting_Button = new QPushButton(frame);
+        Setting_Button->setObjectName(QStringLiteral("Setting_Button"));
+
+        gridLayout->addWidget(Setting_Button, 6, 1, 1, 1);
+
+        Secret_Button = new QPushButton(frame);
+        Secret_Button->setObjectName(QStringLiteral("Secret_Button"));
+
+        gridLayout->addWidget(Secret_Button, 6, 2, 1, 1);
+
+        Remove_Button = new QPushButton(frame);
+        Remove_Button->setObjectName(QStringLiteral("Remove_Button"));
+
+        gridLayout->addWidget(Remove_Button, 6, 5, 1, 1);
+
+        Time_Slider = new QSlider(frame);
+        Time_Slider->setObjectName(QStringLiteral("Time_Slider"));
+        Time_Slider->setOrientation(Qt::Horizontal);
+
+        gridLayout->addWidget(Time_Slider, 3, 0, 1, 6);
+
+        Status_Label = new QLabel(frame);
+        Status_Label->setObjectName(QStringLiteral("Status_Label"));
+
+        gridLayout->addWidget(Status_Label, 5, 0, 1, 6);
+
+        Pause_Button = new QPushButton(frame);
+        Pause_Button->setObjectName(QStringLiteral("Pause_Button"));
+
+        gridLayout->addWidget(Pause_Button, 6, 3, 1, 1);
+
+        Stop_Button = new QPushButton(frame);
+        Stop_Button->setObjectName(QStringLiteral("Stop_Button"));
+
+        gridLayout->addWidget(Stop_Button, 6, 4, 1, 1);
+
+        ISound_Button = new QPushButton(frame);
+        ISound_Button->setObjectName(QStringLiteral("ISound_Button"));
+
+        gridLayout->addWidget(ISound_Button, 6, 0, 1, 1);
+
+        debug_timeEdit = new QTimeEdit(frame);
+        debug_timeEdit->setObjectName(QStringLiteral("debug_timeEdit"));
+        debug_timeEdit->setEnabled(false);
+
+        gridLayout->addWidget(debug_timeEdit, 2, 0, 1, 6);
+
+        debugEnable_checkBox = new QCheckBox(frame);
+        debugEnable_checkBox->setObjectName(QStringLiteral("debugEnable_checkBox"));
+        debugEnable_checkBox->setEnabled(false);
+
+        gridLayout->addWidget(debugEnable_checkBox, 1, 0, 1, 6);
 
 
         gridLayout_2->addWidget(frame, 4, 0, 1, 4);
@@ -218,7 +234,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 322, 144));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 322, 138));
         scrollArea->setWidget(scrollAreaWidgetContents);
 
         gridLayout_3->addWidget(scrollArea, 0, 2, 5, 1);
@@ -253,7 +269,7 @@ public:
         scrollArea_2->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QStringLiteral("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 339, 144));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 339, 138));
         scrollArea_2->setWidget(scrollAreaWidgetContents_2);
 
         gridLayout_5->addWidget(scrollArea_2, 0, 1, 3, 1);
@@ -394,13 +410,15 @@ public:
 #ifndef QT_NO_STATUSTIP
         frame->setStatusTip(QString());
 #endif // QT_NO_STATUSTIP
-        Remove_Button->setText(QApplication::translate("MainWindow", "Remove", Q_NULLPTR));
+        Setting_Button->setText(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
         Secret_Button->setText(QApplication::translate("MainWindow", "#Noblemove", Q_NULLPTR));
+        Remove_Button->setText(QApplication::translate("MainWindow", "Remove", Q_NULLPTR));
         Status_Label->setText(QApplication::translate("MainWindow", "Currently Playing: [NULL] Current Time: [NULL]", Q_NULLPTR));
         Pause_Button->setText(QApplication::translate("MainWindow", "Pause", Q_NULLPTR));
-        ISound_Button->setText(QApplication::translate("MainWindow", "Insert Music", Q_NULLPTR));
         Stop_Button->setText(QApplication::translate("MainWindow", "Stop", Q_NULLPTR));
-        Setting_Button->setText(QApplication::translate("MainWindow", "Settings", Q_NULLPTR));
+        ISound_Button->setText(QApplication::translate("MainWindow", "Insert Music", Q_NULLPTR));
+        debug_timeEdit->setDisplayFormat(QApplication::translate("MainWindow", "hh:mm:ss", Q_NULLPTR));
+        debugEnable_checkBox->setText(QApplication::translate("MainWindow", "Enable Debug", Q_NULLPTR));
         EPlaylist_Button->setText(QApplication::translate("MainWindow", "Edit Playlist", Q_NULLPTR));
         Next_Button->setText(QApplication::translate("MainWindow", "Next", Q_NULLPTR));
         Previous_Button->setText(QApplication::translate("MainWindow", "Previous", Q_NULLPTR));

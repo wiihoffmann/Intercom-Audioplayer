@@ -26,7 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->VU_Meter->setVisible(false);
     ui->VU_Meter_2->setVisible(false);
     ui->Speed_Slider->setVisible(false);
-    ui->Speed_Slider->setDisabled(true);
+    ui->debugEnable_checkBox->setVisible(false);
+    ui->debug_timeEdit->setVisible(false);
 
     QBrush tb(Qt::transparent); // Transparent brush, solid pattern
     ui->Secret_Button->setFlat(true);
@@ -149,9 +150,16 @@ void MainWindow::playList()
     //}
     if(ifplaylist == true)
     {
+        if(current_song_number + 1 < buttons.size())
+        {
         current_song_number++;
         current = buttons.at(current_song_number);
         playSound(buttons.at(current_song_number)->toolTip());
+        }else{
+            current_song_number = 0;
+            current = buttons.at(current_song_number);
+            playSound(buttons.at(current_song_number)->toolTip());
+        }
     }
 }
 
@@ -294,13 +302,16 @@ void MainWindow::setVolume(int value)
 
 void MainWindow::setStatus() //Bug: When telephone buttons are pressed, the fade out happens.
 {
+    if(ifDebug == false)
+    {
     currentTime = QTime::currentTime().toString();
+    }
 
     if(buttons1.count() > 0)
     {
         for(int a = 0; a < buttons1.count(); a++)
         {
-            if(currentTime == timePreset[buttons1.at(a)->toolTip()].at(1))
+            if(currentTime == timePreset[buttons1.at(a)->toolTip()].at(1)) //currentTime.contains(timePreset[buttons1.at(a)->toolTip()].at(1))
             {
                 if(!(ifOnce)) //Only allowing once
                 {
@@ -314,10 +325,13 @@ void MainWindow::setStatus() //Bug: When telephone buttons are pressed, the fade
             }
             if(currentTime == timePreset[buttons1.at(a)->toolTip()].at(2))
             {
+                //if(!(ifOnce)) Implement this in the future! because debug is breaks it to -3
+                //{
                 fadeChange = -(fade);
                 isFade = true;
                 currentTimePreset = "NULL";
                 break;
+                //}
             }
         }
     }
@@ -336,7 +350,7 @@ void MainWindow::setStatus() //Bug: When telephone buttons are pressed, the fade
         {
             isFade = false;
             temp = current_song_number;
-            on_Stop_Button_clicked();
+            //on_Stop_Button_clicked();
             current_song_number = -3;
             on_intercomCancel_Button_clicked();
             return;
@@ -369,7 +383,7 @@ void MainWindow::setStatus() //Bug: When telephone buttons are pressed, the fade
     {
         ui->Next_Button->setDisabled(true);
         ui->Previous_Button->setDisabled(true);
-        if(current_song_number == -1)
+        if(current_song_number == -1) //Make sure current_song_number isn't -2 or less
         {
 
         }else if(current_song_number == -2)
@@ -387,6 +401,9 @@ void MainWindow::setStatus() //Bug: When telephone buttons are pressed, the fade
                 playList();
             }
         }else if(current_song_number == -3){
+            on_Stop_Button_clicked();
+            current_song_number = temp;
+            qDebug() << current_song_number;
             return;
         }else if(ifplaylist == true && current_song_number < buttons.size() - 1)
         {
@@ -439,6 +456,9 @@ void MainWindow::on_Stop_Button_clicked()
 {
     if(BASS_ChannelIsActive(stream))
     {
+    ifOnce = false;
+    current_song_number = -1;
+    //isFade = false;
     BASS_Free();
     BASS_SetDevice(device);
     BASS_Free();
@@ -731,6 +751,18 @@ void MainWindow::on_actionOpen_Preset_triggered()
 void MainWindow::on_Secret_Button_clicked()
 {
     noblemove++;
+    if(noblemove == 1)
+    {
+        ui->debugEnable_checkBox->setEnabled(true);
+        ui->debugEnable_checkBox->setVisible(true);
+        ui->debug_timeEdit->setEnabled(true);
+        ui->debug_timeEdit->setVisible(true);
+    }
+    if(noblemove == 3)
+    {
+        ui->Speed_Slider->setVisible(true);
+        ui->Speed_Slider->setEnabled(true);
+    }
     if(noblemove == 6)
     {
         QMessageBox box;
@@ -753,8 +785,8 @@ void MainWindow::on_Secret_Button_clicked()
 
 void MainWindow::on_Speed_Slider_sliderMoved(int position)
 {
-    //BASS_SetDevice(device);
-    //BASS_ChannelSetAttribute(stream, BASS_ATTRIB_MUSIC_SPEED, position);
+    BASS_SetDevice(device);
+    BASS_ChannelSetAttribute(stream, BASS_ATTRIB_MUSIC_SPEED, position);
 }
 
 void MainWindow::on_actionSoundBoard_Mode_triggered()
@@ -1000,4 +1032,14 @@ void MainWindow::on_random_Button_clicked()
     current_song_number = index;
     ui->Next_Button->setEnabled(true);
     ui->Previous_Button->setEnabled(true);
+}
+
+void MainWindow::on_debug_timeEdit_editingFinished()
+{
+    currentTime = ui->debug_timeEdit->time().toString();
+}
+
+void MainWindow::on_debugEnable_checkBox_clicked(bool checked)
+{
+    ifDebug = checked;
 }

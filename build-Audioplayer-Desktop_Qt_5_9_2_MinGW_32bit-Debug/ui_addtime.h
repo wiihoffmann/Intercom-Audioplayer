@@ -127,9 +127,9 @@ public:
         time_Label->setText(QApplication::translate("addTime", "Add Time", Q_NULLPTR));
         name_LineEdit->setPlaceholderText(QApplication::translate("addTime", "Name", Q_NULLPTR));
         start_Label->setText(QApplication::translate("addTime", "Start Time:", Q_NULLPTR));
-        start_timeEdit->setDisplayFormat(QApplication::translate("addTime", "h:mm:ss AP", Q_NULLPTR));
+        start_timeEdit->setDisplayFormat(QApplication::translate("addTime", "hh:mm:ss AP", Q_NULLPTR));
         end_Label->setText(QApplication::translate("addTime", "End Time:", Q_NULLPTR));
-        end_timeEdit->setDisplayFormat(QApplication::translate("addTime", "h:mm:ss AP", Q_NULLPTR));
+        end_timeEdit->setDisplayFormat(QApplication::translate("addTime", "hh:mm:ss AP", Q_NULLPTR));
         volume_Label->setText(QApplication::translate("addTime", "Volume:", Q_NULLPTR));
         fade_checkBox->setText(QApplication::translate("addTime", "Fade In and Out", Q_NULLPTR));
     } // retranslateUi

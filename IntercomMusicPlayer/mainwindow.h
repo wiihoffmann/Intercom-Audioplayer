@@ -116,6 +116,10 @@ private slots:
 
     void on_random_Button_clicked();
 
+    void on_debug_timeEdit_editingFinished();
+
+    void on_debugEnable_checkBox_clicked(bool checked);
+
 public slots:
     void on_Button_Clicked();
 
@@ -166,6 +170,7 @@ private:
     bool isFade = false;
     bool ifRandom = false;
     bool ifOnce = false;
+    bool ifDebug = false;
 
     QPushButton *current;
     QPushButton *editcurrent;

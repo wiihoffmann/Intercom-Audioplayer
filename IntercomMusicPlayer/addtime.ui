@@ -44,7 +44,7 @@
    <item row="3" column="0">
     <widget class="QTimeEdit" name="start_timeEdit">
      <property name="displayFormat">
-      <string>h:mm:ss AP</string>
+      <string>hh:mm:ss AP</string>
      </property>
      <property name="calendarPopup">
       <bool>false</bool>
@@ -71,7 +71,7 @@
    <item row="5" column="0">
     <widget class="QTimeEdit" name="end_timeEdit">
      <property name="displayFormat">
-      <string>h:mm:ss AP</string>
+      <string>hh:mm:ss AP</string>
      </property>
      <property name="time">
       <time>
