@@ -930,6 +930,14 @@ void MainWindow::on_one_Button_clicked()
 {
     current_song_number = -1;
     playSound("./Generated Tones/1.wav");
+
+    /*LPHLINEAPP line;
+    HINSTANCE                hInstance;
+    LINECALLBACK             lpfnCallback;
+    LPDWORD                  lpdwNumDevs;
+    LPDWORD                  lpdwAPIVersion;
+    LPLINEINITIALIZEEXPARAMS lpLineInitializeExParams;
+    lineInitializeEx(line, hInstance, lpfnCallback, NULL, lpdwNumDevs, lpdwAPIVersion, lpLineInitializeExParams);*/
 }
 
 void MainWindow::on_two_Button_clicked()

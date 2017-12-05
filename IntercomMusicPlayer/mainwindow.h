@@ -27,6 +27,7 @@
 #include "fileref.h"
 #include "tag.h" //For ID3v2 Tags
 #include <tapi.h> //For Modem Card
+#include <windows.h>
 
 
 namespace Ui {
