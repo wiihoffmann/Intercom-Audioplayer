@@ -78,7 +78,7 @@ public:
 
         noDialTone_Checkbox = new QCheckBox(Settings);
         noDialTone_Checkbox->setObjectName(QStringLiteral("noDialTone_Checkbox"));
-        noDialTone_Checkbox->setEnabled(false);
+        noDialTone_Checkbox->setEnabled(true);
 
         gridLayout->addWidget(noDialTone_Checkbox, 13, 0, 1, 1);
 

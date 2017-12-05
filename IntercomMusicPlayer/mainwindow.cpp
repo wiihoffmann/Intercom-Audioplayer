@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -240,6 +239,7 @@ void MainWindow::on_Setting_Button_clicked() //Setting_Button
     settings.setSampleRate(Samplerate);
     settings.setRandom(ifRandom);
     settings.setFade(fade * 100000);
+    settings.setNoDial(ifNoDial);
 
     settings.exec(); //Executing
 
@@ -263,6 +263,7 @@ void MainWindow::on_Setting_Button_clicked() //Setting_Button
     Samplerate = settings.getSampleRate();
     ifRandom = settings.getRandom();
     fade = settings.getFade() * 0.00001;
+    ifNoDial = settings.getNoDial();
 
     BASS_SetDevice(device);
     BASS_ChannelSetAttribute(stream, BASS_ATTRIB_VOL, volume);
@@ -302,7 +303,7 @@ void MainWindow::setVolume(int value)
 
 void MainWindow::setStatus() //Bug: When telephone buttons are pressed, the fade out happens.
 {
-    if(ifDebug == false)
+    if(ifDebug == false) //This is where the time is set
     {
     currentTime = QTime::currentTime().toString();
     }
@@ -318,8 +319,24 @@ void MainWindow::setStatus() //Bug: When telephone buttons are pressed, the fade
                     ifOnce = true;
                     currentTimePreset = timePreset[buttons1.at(a)->toolTip()].at(0);
                     temp = current_song_number;
+                    if(ifNoDial == false)
+                    {
                     current_song_number = -2; //Fix this, this is due to the for loop not breaking and making it -2
                     on_intercomAll_Button_clicked();
+                    }else{
+                        isFade = true;
+                        fadeChange = fade;
+                        volume = 0;
+                        if(ifRandom == true)
+                        {
+                            if(buttons.size() > 0)
+                            on_random_Button_clicked();
+                        }else{
+                            current_song_number = temp;
+                            if(buttons.size() > 0)
+                            playList();
+                        }
+                    }
                     break;
                 }
             }
@@ -352,15 +369,21 @@ void MainWindow::setStatus() //Bug: When telephone buttons are pressed, the fade
             temp = current_song_number;
             //on_Stop_Button_clicked();
             current_song_number = -3;
+            if(ifNoDial == false)
+            {
             on_intercomCancel_Button_clicked();
+            }else{
+                on_Stop_Button_clicked();
+                current_song_number = temp;
+            }
             return;
         }
     }
 
     if(BASS_ChannelIsActive(stream))
     {
-    const double time = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetPosition(stream, BASS_POS_BYTE));
-    const double maxitime = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetLength(stream, BASS_POS_BYTE));
+    const double time = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetPosition(stream, BASS_POS_BYTE)); //Gets the time data
+    const double maxitime = BASS_ChannelBytes2Seconds(stream, BASS_ChannelGetLength(stream, BASS_POS_BYTE)); //Get the max time data
     QString artist;
     QString title;
 
@@ -383,7 +406,7 @@ void MainWindow::setStatus() //Bug: When telephone buttons are pressed, the fade
     {
         ui->Next_Button->setDisabled(true);
         ui->Previous_Button->setDisabled(true);
-        if(current_song_number == -1) //Make sure current_song_number isn't -2 or less
+        if(current_song_number == -1) //Make sure current_song_number isn't -2 or less or else it will crash
         {
 
         }else if(current_song_number == -2)
@@ -403,7 +426,6 @@ void MainWindow::setStatus() //Bug: When telephone buttons are pressed, the fade
         }else if(current_song_number == -3){
             on_Stop_Button_clicked();
             current_song_number = temp;
-            qDebug() << current_song_number;
             return;
         }else if(ifplaylist == true && current_song_number < buttons.size() - 1)
         {
@@ -529,7 +551,7 @@ void MainWindow::on_Time_Slider_sliderReleased()
     timer->start(10);
 }
 
-void MainWindow::on_actionSave_Preset_triggered()
+void MainWindow::on_actionSave_Preset_triggered() //Where preset xml gets written
 {
     QString filename = QFileDialog::getSaveFileName(this, "Save File", "C:\\", "XML (*.xml)");
 
@@ -559,6 +581,8 @@ void MainWindow::on_actionSave_Preset_triggered()
     writer.writeTextElement("Random", QString::number(ifRandom));
 
     writer.writeTextElement("Fade", QString::number(fade));
+
+    writer.writeTextElement("Nodial", QString::number(ifNoDial));
 
     writer.writeStartElement("Devices");
 
@@ -604,7 +628,7 @@ void MainWindow::on_actionSave_Preset_triggered()
     file.close();
 }
 
-void MainWindow::on_actionOpen_Preset_triggered()
+void MainWindow::on_actionOpen_Preset_triggered() //Where xml file is read
 {
     QString file_name = QFileDialog::getOpenFileName(this, tr("Open file"), tr("C:\\"), tr("XML (*.xml)"));
 
@@ -661,6 +685,10 @@ void MainWindow::on_actionOpen_Preset_triggered()
                 if(reader.name() == "Fade")
                 {
                     fade = reader.readElementText().toDouble();
+                }
+                if(reader.name() == "Nodial")
+                {
+                    ifNoDial = reader.readElementText().toInt();
                 }
                 if(reader.name() == "Devices")
                 {

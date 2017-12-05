@@ -37,7 +37,7 @@
    <item row="13" column="0">
     <widget class="QCheckBox" name="noDialTone_Checkbox">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="text">
       <string>No Dial Tone</string>

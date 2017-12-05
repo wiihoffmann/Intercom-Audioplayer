@@ -55,6 +55,9 @@ public:
 
     int getFade();
 
+    void setNoDial(bool boolean);
+
+    bool getNoDial();
 private slots:
     void on_Volume_Slider_sliderMoved(int position);
 

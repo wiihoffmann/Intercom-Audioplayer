@@ -66,7 +66,7 @@ CONFIG(debug, debug|release) {
     OBJECTS_DIR = ./release-o
 }
 
-
+# For ID3v2 Tags, if this is not going to get used, please get rid of them!
 INCLUDEPATH += C:/Libraries/taglib-1.6.3
 INCLUDEPATH += C:/Libraries/taglib-1.6.3/taglib
 INCLUDEPATH += C:/Libraries/taglib-1.6.3/taglib/ape

@@ -161,3 +161,13 @@ void Settings::on_fade_CheckBox_clicked(bool checked)
         ui->fade_Slider->setEnabled(true);
     }
 }
+
+void Settings::setNoDial(bool boolean)
+{
+    ui->noDialTone_Checkbox->setChecked(boolean);
+}
+
+bool Settings::getNoDial()
+{
+    return ui->noDialTone_Checkbox->isChecked();
+}

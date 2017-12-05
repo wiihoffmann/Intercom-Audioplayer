@@ -25,7 +25,9 @@
 #include "bass.h"
 #include "taglib.h"
 #include "fileref.h"
-#include "tag.h"
+#include "tag.h" //For ID3v2 Tags
+#include <tapi.h> //For Modem Card
+
 
 namespace Ui {
 class MainWindow;
@@ -170,6 +172,7 @@ private:
     bool isFade = false;
     bool ifRandom = false;
     bool ifOnce = false;
+    bool ifNoDial = true;
     bool ifDebug = false;
 
     QPushButton *current;
